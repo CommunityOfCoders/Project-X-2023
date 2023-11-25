@@ -14,6 +14,8 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#theory-and-approach">Theory and Approach</a></li>
     <li><a href="#future-scope">Future Scope</a></li>
+    <li><a href="#acknowledgements">Acknowledgements</a></li>
+    <li><a href="#contributors">Contributors</a></li>
   
 ## Demo
 
@@ -321,8 +323,20 @@ In summary, alpha-beta pruning allows the algorithm to ignore parts of the searc
 More Use of Genetic Algorithm in The AI part</li>
 <li>Better tuning of Parameter weights</li>
 <li>A database to store player information</li>
+<li>More Game Modes</li>
 </ul>
 
+## Acknowledgements
+Project Mentor <a href="https://github.com/siddheshsingh26">Siddeshsingh Tanwar</a> for
+his support and guidance throughout the duration of the project.
+
+<a href="https://github.com/CommunityOfCoders">Community of Coders(COC)</a>
+for providing us with the opportunity to work on this project.
+
+## Contributors
+<ul>
+    <a href="https://github.com/Aditya-y9" ><li>Aditya Yedurkar</li> </a>
+    <a href="https://github.com/Rohan20-10" ><li>Rohan Parab</li> </a>
 
 
 
