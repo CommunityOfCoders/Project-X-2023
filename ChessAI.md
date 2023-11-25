@@ -28,14 +28,10 @@ https://drive.google.com/file/d/1-EqixFDe9Iy7AqRsp5VVrwxX8uG5FjgJ/view?usp=shari
 </p>
 <p align="center" font-size="30px">AI Move</p>
 
-
 <p align="center">
   <img src="https://github.com/Aditya-y9/COC_Project_X_ChessAI/assets/122613756/85e2aa95-1bfb-467f-ba0d-e7e296b0f49e" alt="animated" height="400" width="500" />
 </p>
-
 <p align="center">Home Screen</p>
-
-
 
 <p align="center">
   <img src="https://github.com/Aditya-y9/COC_Project_X_ChessAI/assets/122613756/df4df40b-a94b-41ce-919f-d022c4f9ba2d" height="400" width="400">
@@ -46,6 +42,39 @@ https://drive.google.com/file/d/1-EqixFDe9Iy7AqRsp5VVrwxX8uG5FjgJ/view?usp=shari
   <img src="https://github.com/Aditya-y9/COC_Project_X_ChessAI/assets/122613756/05a6666d-c55c-4cac-944f-7690ec610cf5" height="400" width="400"/>
 </p>
 <p align="center">Chess Board With Pieces</p>
+
+<p align="center">
+  <img src="https://github.com/Aditya-y9/COC_Project_X_ChessAI/assets/122613756/327727a2-ae72-46b8-aed3-c2e70753db65" alt="animated" height="300" width="500" />
+</p>
+<p align="center" font-size="30px">Undo Move</p>
+
+<p align="center">
+  <img src="https://github.com/Aditya-y9/COC_Project_X_ChessAI/assets/122613756/d7018ca7-8171-45f9-acf5-31e5aac8928c" alt="animated" height="300" width="500" />
+</p>
+<p align="center" font-size="30px">Castling Move</p>
+
+<p align="center">
+  <img src="https://github.com/Aditya-y9/COC_Project_X_ChessAI/assets/122613756/e232a89e-ffec-4ee7-9b10-e0920ce1b626" alt="animated" height="300" width="500" />
+</p>
+<p align="center" font-size="30px">Checkmate</p>
+
+
+<p align="center">
+  <img src="https://github.com/Aditya-y9/COC_Project_X_ChessAI/assets/122613756/7f2becfc-fb0b-42ec-9f69-40759a327391" alt="animated" height="300" width="500" />
+</p>
+<p align="center" font-size="30px">Stalemate</p>
+
+
+<p align="center">
+  <img src="https://github.com/Aditya-y9/COC_Project_X_ChessAI/assets/122613756/7b4a1d8d-c8db-4bcc-8dcb-306a35b984bb" alt="animated" height="300" width="500" />
+</p>
+<p align="center" font-size="30px">Enpassant Capture</p>
+
+<p align="center">
+  <img src="https://github.com/Aditya-y9/COC_Project_X_ChessAI/assets/122613756/e45163ba-631f-4081-8e5c-86af09f3bfae" alt="animated" height="300" width="500" />
+</p>
+<p align="center" font-size="30px">Reset Game</p>
+
 
 
 
