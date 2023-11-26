@@ -3,11 +3,11 @@
 # About the Project
 
 ## Results
-![Inputs](assets/gif1.gif)
-![CrossAligned](assets/gif2.gif) 
+![Inputs](https://github.com/DeadSpheroid/Text-Style-Transfer/blob/main/assets/gif1.gif)
+![CrossAligned](https://github.com/DeadSpheroid/Text-Style-Transfer/blob/main/assets/gif2.gif) 
 
-![DeleteRetrieve](assets/gif3.gif) 
-![StyleFormer](assets/gif4.gif)
+![DeleteRetrieve](https://github.com/DeadSpheroid/Text-Style-Transfer/blob/main/assets/gif3.gif) 
+![StyleFormer](https://github.com/DeadSpheroid/Text-Style-Transfer/blob/main/assets/gif4.gif)
 
 ## Aim
 The aim of this project is to utilise various neural network architectures to modify the style of a sentence while preserving its meaning.
