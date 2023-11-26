@@ -1,102 +1,105 @@
-
 # 3D-Reconstruction from Single RGB Image
 
-Indentification of objects from a single RGB input image and generating separate masked images using YOLOv8 and YOLO-SAM architectures, generating 3-dimensional mesh using MeshRCNN for every masked image and concatenating them based on their x, y and relative z space co-ordinates to generate a 3D-reconstruction of the scene.
+## Project:
+The model takes a single RGB image as input and attempts at creating a 3D mesh of the scene visible in the image by the methods of panoptic segmentation, masking, Mesh R CNN and then concatenation of alignment aware meshes to present the output.
+
+### Input Image: 
+![](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/assets/result2/model_input2.jpg?raw=true)
 
 
+### Output:
+![](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/assets/result2/model_output2.gif?raw=true)
 
-![s](https://github.com/lbhnsh/3D-Reconstruction/blob/Param-Parekh/outputs/test.png?raw=true)
-
-
-![s](https://github.com/lbhnsh/3D-Reconstruction/blob/Param-Parekh/outputs/Screenshot%20from%202023-11-07%2023-42-56.png?raw=true)
-
-
-
-
-
-
-
-
-
-
-
-## About the Project
-Panoptic segmentation: 
-In semantic segmentation, all images of a pixel belong to a specific class. In instance segmentation, each object gets a unique identifier and appears as an extension of semantic segmentation. Panoptic Segmentation combines the merits of both approaches and distinguishes different objects to identify separate instances of each kind of object in the input image.
-   1. Generation of separate mask for every instance. Save only instances of those classes on which model is trained
-      
-      ![](https://github.com/lbhnsh/3D-Reconstruction/blob/Param-Parekh/object_segmentation/panoptic.png?raw=true)
-   3. Make mesh for every mask using MeshRCNN
-      MeshRCNN predicts and aligns 3D-voxelised models using graphical convolutional network. It was run on Colab T4 GPU
-   5. Merge meshes into one object file according to alignment of x-, y- and z- axes in RGBD plane
-   ![](https://github.com/lbhnsh/3D-Reconstruction/blob/main/model_output2.gif?raw=true)
-   
 
 
 ## Table of Contents
-* [Tech Stack](https://github.com/lbhnsh/3D-Reconstruction/tree/Final#tech-stack)
-* [Installations and preprocessing](https://github.com/lbhnsh/3D-Reconstruction/blob/Final/README.md#installations-and-preprocessing)
+* [About the Project](https://github.com/lbhnsh/3D-Reconstruction/tree/Final#about-the-project)
 * [Process Flow](https://github.com/lbhnsh/3D-Reconstruction/tree/Final#process-flow)
 * [File Structure](https://github.com/lbhnsh/3D-Reconstruction/blob/Final/README.md#file-structure)
-* [Execution](https://github.com/lbhnsh/3D-Reconstruction/blob/Final/README.md#execution)
-* [Results](https://github.com/lbhnsh/3D-Reconstruction/blob/Final/README.md#results)
-* [Future Work](https://github.com/lbhnsh/3D-Reconstruction/blob/Final/README.md#future-work)
+* [Architecture and Dataset](https://github.com/lbhnsh/3D-Reconstruction/blob/Final/README.md#architecture-and-dataset)
+* [Installations and Execution](https://github.com/lbhnsh/3D-Reconstruction/blob/Final/README.md#installations-and-execution)
+* [Results](https://github.com/lbhnsh/3D-Reconstruction/blob/Final/demo_video.gif)
+* [Tech Stack](https://github.com/lbhnsh/3D-Reconstruction/tree/Final#tech-stack)
+* [Future Prospects](https://github.com/lbhnsh/3D-Reconstruction/blob/Final/README.md#future-prospects)
 * [Contributors](https://github.com/lbhnsh/3D-Reconstruction/blob/Final/README.md#contributors)
 * [Acknowledgements and Resources](https://github.com/lbhnsh/3D-Reconstruction/blob/Final/README.md#acknowledgements-and-resources)
 
 
-## Tech Stack
+## About the Project:
 
-[Open3d (Build from Source)](http://www.open3d.org/docs/release/compilation.html)
+Our Approach consists of first performing Panoptic Segmentation on the given image. This step associates distinct objects present in the scene with unique hues. This association of objects with unique hues is then used to create masks of those object from the input RGB Image.
 
-[MiDaS](https://pytorch.org/hub/intelisl_midas_v2/)
+We create masks in order to aid the Mask-RCNN modality which is responsible to create masks for the objects present and then Mesh-RCNN creates mesh of the important objects present in the image. 
 
-[Pix3D dataset](http://pix3d.csail.mit.edu/)
+After the meshes are produced, they are then concatenated together in order to reconstruct the complete 3D Scene. Concatenation should result in the meshes being perfectly aligned with each other and with the camera as present in the input RGB image
 
-[ShapeNet rendered images](ftp://cs.stanford.edu/cs/cvgl/ShapeNetRendering.tgz)
+We've used ShapeNet Dataset which contains huge CAD amounts of model from diverse categories. This dataset is standard when it comes to ML model building for 3D applications. We've also evaluated our model on the challenging dataset of Pix3D. This dataset consists of real life images and models of objects which are aligned with the image provided making it a one of a kind dataset, as it helps yield reasonable output even when challenged with real-life images.
 
+### Process Flow
 
-
-
-
-
-
-
-## Installations and Preprocessing
-
-Tested on [Ubuntu 20.04](https://ubuntu.com/download/desktop)
-
-[MeshRCNN](https://github.com/facebookresearch/meshrcnn)
-
-[PyTorch3D](https://pytorch3d.org/#quickstart)
-
-[Open3D v0.17.0](http://www.open3d.org/docs/release/getting_started.html)
-
-[Ultralytics v8.0.200](https://docs.ultralytics.com/quickstart/)
-
-
-
-
-
-
-## Process Flow
-
+![](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/assets/workflow.jpg?raw=true)
 ![](https://github.com/lbhnsh/3D-Reconstruction/blob/Param-Parekh/Screenshot%20from%202023-11-08%2002-50-38.png?raw=true)
 
 
+1. **Input**: The complete model will have the input in the form of a single RGB image. The image file can be in .jpg or .png file format. 
+
+![](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/assets/result1/input1.jpg?raw=true)
 
 
+2. **Panoptic segmentation:** For the given image with our ML Model, panoptic segmentation will be applied on the given input image. As Panoptic Segmentation is the combination of instance segmentation as well as semantic segmentation, we get the regions of the objects present but as well as the distinct regions  different classification of objects present in the scene
+
+![](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/assets/result1/segmented_image.png?raw=true)
+
+
+3. **Generation of masks**: With the help of the regions obtained by the Panoptic Segmentation, we then move towards generating masks of the distinct object instances present in the image. We perform this step specially to aid the formation of better masks by the Mask RCNN which is the primary input for the Mesh Modality which creates mesh for individual objects. 
+
+Generation of separate mask for every instance. Save only instances of those classes on which model is trained
+
+![](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/assets/result1/segmented_rgb_images/segment_rgb_121_2.png?raw=true) 
+      
+![](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/assets/result1/segmented_rgb_images/segment_rgb_121_4.png?raw=true)
+   
+4. **Generation of individual mesh**: By the now obtained refined and accurate masks of the the objects, mesh are created singular objects by the mesh formation block applied in Mesh RCNN. A rough voxel grid is first formed for the image and which is then refined by Mesh Refinement, following a coarse-to-fine approach which creates an ideal mesh. 
+
+   
+*Inference can be run on Colab T4 GPU*
+      
+![](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/assets/result1/sofa.gif?raw=true)
+
+![](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/assets/result1/table.gif?raw=true)
+   
+5. **Concatenation of meshes**: We use the functions offered by the Open3D library in order to achieve the final mesh. The final mesh consists of all the previous individual meshes aligned with each other and with the camera as present in the input image.
+   
+   ![](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/assets/result1/model_output1.gif?raw=true)
+   
 
 ## File Structure
+```
+📦3D-Reconstruction 
+ ┣ 📂assets                            # Contains gifs, objs and images of the results 
+ ┣ 📂scripts                           # Python programs to run 
+ ┃ ┣ segment_and_mask.py               # Used to create and save masks of objects from input image
+ ┃ ┣ inference.ipynb                   # Run this notebook to get results
+ ┣ 📜README.md
+ ┣ 📜demo_video.gif                    # Demo Video
+ ┣ 📜project_report.docx               # Project Report
+ ┗ 📜requirements.txt                  # Requirements
+``` 
+## Architecture and Dataset
 
-* [instance_segmentation.py](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/scripts/instance_segmentation.py)
-   * [segment_and_mask.py](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/scripts/segment_and_mask.py)
-   * [contour_based_segmentation.py](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/scripts/contour_based_segmentation.py)
-* [inference.ipynb](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/scripts/inference.ipynb)
-* [visualize_obj.py](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/scripts/visualize_obj.py)
-* [download_images.py](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/scripts/download_images.py)
+The Mesh that gets generated from the masked image is done on the basis of the [Mesh RCNN](https://arxiv.org/pdf/1906.02739.pdf) architecture
 
-## Execution
+![](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/assets/MeshRCNNarch.png?raw=true)
+
+It has been trained upon [Pix3D](http://pix3d.csail.mit.edu/) dataset
+
+![](https://github.com/lbhnsh/3D-Reconstruction/blob/Labhansh-Naik/assets/pix3d.png?raw=true)
+
+
+## Installations and Execution
+
+Project was tested on Ubuntu 22.04 and T4 GPU offered by Google Colab
+
 
 Cloning into device 
 
@@ -104,30 +107,48 @@ Cloning into device
 
 ```cd 3D-Reconstruction```
 
+**Create a virtual env for the project**
+
 ```pip install requirements.txt```
 
-```ls```
+Rest all dependencies will be taken care of by the scripts
 
-```python3 filename.py```
+```cd scripts```
 
-To view .obj file 
+```python3 segment_and_mask.py```
+
+```then run the colab file inference.ipynb```
+
+
+* To view .obj file
+  
+You can use Open3d to view the saved mesh or use :
 
 [Online 3D Viewer](https://3dviewer.net/)
 
 
-## Results
 
-![](https://github.com/lbhnsh/3D-Reconstruction/blob/main/final_results/input1.jpg?raw=true)
-![model_output1.gif](https://github.com/lbhnsh/3D-Reconstruction/blob/main/final_results/model_output1.gif?raw=true)
+## Tech Stack
+
+* Open3D
+
+* Pytorch3D
+  
+* Detectron2
+  
+* Ultralytics
 
 
-## Future Work
+## Future Prospects
 
-1. Find or develop a better dataset. Train on that dataset and study output
-2. Upgrade or develop new loss calculating functions so as to include even at  minor scale variations in objects.
-3. Develop models capable of real-time multi-object detection which can be used to identify and track criminals in crowded public spaces where human surveillance is very difficult.
+* Till now we’re able to create a combined mesh which aligns with the image. In future we aim at reconstruction of the wall and floor in order to create the entire scene present.
 
+* The model is restricted only to a defined number of interior objects such as bed, couch, chair because of the limited number of classes present in the Pix3D dataset. We aim at improving the dataset by either finding a more diverse dataset or adding additional categories to the existing dataset.
 
+* Due to GPU constraints we were unable to train the model to get an improved output. Therefore we plan to train on our new modified and diverse dataset in order to improve the diversity as well as the quality of mesh being produced.
+
+## Mentor
+* [Soham Mulye](https://github.com/Shazam213)
 ## Contributors
 
 * [Labhansh Naik](https://github.com/lbhnsh)
@@ -136,12 +157,16 @@ To view .obj file
 
 ## Acknowledgements and Resources
 
-[Pixel2Mesh](https://openaccess.thecvf.com/content_ECCV_2018/papers/Nanyang_Wang_Pixel2Mesh_Generating_3D_ECCV_2018_paper.pdf)
+[Open 3D library documentation](http://www.open3d.org/docs/release/)
 
-[Depth-aware Pixel2Mesh](http://cs231n.stanford.edu/reports/2022/pdfs/167.pdf) 
+[Pixel2Mesh Paper by Nanyang Wang et al](https://openaccess.thecvf.com/content_ECCV_2018/papers/Nanyang_Wang_Pixel2Mesh_Generating_3D_ECCV_2018_paper.pdf)
 
-[Holistic 3D scene Understanding](https://arxiv.org/pdf/2103.06422v3.pdf)
+For Image Segmentation Methods
+* https://huggingface.co/shi-labs/oneformer_coco_swin_large 
+* https://huggingface.co/docs/transformers/main/en/model_doc/maskformer 
+* https://huggingface.co/blog/mask2former 
 
-[YOLOv8 with YOLO-SAM](https://blog.roboflow.com/how-to-use-yolov8-with-sam/)
+[Mesh R CNN by Justin Johnson et al](https://arxiv.org/pdf/1906.02739.pdf)
 
 
+[Detectron2](https://github.com/facebookresearch/detectron2)
